@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  * @author Dominik Kupka
+  ***********************************************************
+  ***********************************************************
+  ************** MyCE CE-Device Automatization **************
+  ******************** VERSION 1.0.1 ************************
+  ******************* AndroidManifest ***********************
+  ***********************************************************
+  * Programmed by Dominik Kupka (Systemengineering)
+  * recomli GmbH
+  * Bretonischer Ring 13, 85630 Grasbrunn
+  * Date: 04.12.2017
+  -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.engineering.allgeier.mycetesterapp">
+
+    <!--
+        The following lines are the permission used by the app.
+    -->
+
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission-sdk-23 android:name="android.permission.GET_ACCOUNTS"/>
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission-sdk-23 android:name="android.permission.READ_PHONE_STATE"/>
+
+
+
+    <!-- Permission for performing bluetooth performances-->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <permission android:name="android.permission.BLUETOOTH" android:label="BLUETOOTH" />
+    <permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+    <!-- Permissions for the access of the internal device memory for playing music -->
+    <permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!-- Permission to read the accounts on the android device -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+
+    <!-- Permissions for network connections, e.g. sending mails or if a sim card is needed-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission-sdk-23 android:name="android.permission.SEND_SMS" />
+
+    <uses-permission android:name="android.permission.GET_array_accounts" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
+
+
+    <!-- Permission for performing phone calls on different sdk versions -->
+
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+
+    <permission android:name="android.permission.ANSWER_PHONE_CALLS" />
+
+    <permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission-sdk-23 android:name="android.permission.CALL_PHONE" />
+    <permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission-sdk-23 android:name="android.permission.READ_PHONE_STATE" />
+
+    <!-- Permission for accepting incoming phone calls on different sdk versions -->
+
+    <permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission-sdk-23 android:name="android.permission.WAKE_LOCK" />
+
+    <permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission-sdk-23 android:name="android.permission.DISABLE_KEYGUARD" />
+
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".bluetoothmyceapp.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.engineering.allgeier.mycetesterapp.phone.c_AcceptCallActivity"
+            android:launchMode="singleTop"
+            android:excludeFromRecents="true"
+            android:taskAffinity=""
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
+        <receiver android:name="com.engineering.allgeier.mycetesterapp.phone.c_PhoneStateReceiver">
+            <intent-filter android:priority="0">
+                <action android:name="android.intent.action.PHONE_STATE" />
+                <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
+            </intent-filter>
+        </receiver>
+        <!-- Needed for the incoming call detection-->
+        <receiver android:name="com.engineering.allgeier.mycetesterapp.phone.c_CallReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.PHONE_STATE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>
